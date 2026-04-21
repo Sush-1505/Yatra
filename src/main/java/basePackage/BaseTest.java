@@ -1,11 +1,11 @@
 package basePackage;
-
 import org.openqa.selenium.By;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utilityPackage.ScreenshotUtil;
 import utilityPackage.GetDataMain;
+import static basePackage.DriverManager.*;
 
 public class BaseTest {
 
@@ -27,12 +27,13 @@ public class BaseTest {
 //	    public void tearDownx() { 
 //	        driver.quit();
 //	    }
-	    
+	
+	
 	    @BeforeMethod
 	    public void setup() {
-	        DriverManager.setDriver("chrome");   // or "firefox"
-	        DriverManager.getDriver().manage().window().maximize();
-	        DriverManager.getDriver().get(GetDataMain.getProperty("Base_url"));
+	        setDriver("chrome");   // or "firefox"
+	        getDriver().manage().window().maximize();
+	        getDriver().get(GetDataMain.getProperty("Base_url"));
 	        closeWindow();
 	        try {
 				Thread.sleep(2000);
@@ -42,25 +43,25 @@ public class BaseTest {
 			}
 	    }
 
-//	    @AfterMethod
-//	    public void tearDown() {
-//	        DriverManager.quitDriver();
-//	    }
-	    
-	    
 	    @AfterMethod
+	    public void tearDown() {
+	        quitDriver();
+	    }
+	    
+	    
+	 //   @AfterMethod
 	    public void tearDown(ITestResult result) {
 
 	        if(result.getStatus() == ITestResult.FAILURE) {
 	            ScreenshotUtil.captureScreenshot(result.getName());
 	        }
 
-	        DriverManager.quitDriver();
+	        quitDriver();
 	    }
 	    
 	    
 	    public static void closeWindow() {
-	    	DriverManager.getDriver().findElement(By.xpath("//span[contains(@class,\"style_cross__q1ZoV\")]//img")).click();
+	    	getDriver().findElement(By.xpath("//span[contains(@class,\"style_cross__q1ZoV\")]//img")).click();
 	    }
 
 		    }
