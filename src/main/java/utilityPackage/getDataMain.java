@@ -3,7 +3,7 @@ package utilityPackage;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-public class getDataMain {
+public class GetDataMain {
 
 			 private static Properties prop;
 
