@@ -7,21 +7,22 @@ public class GetDataMain {
 
 			 private static Properties prop;
 
-		    public static String getProperty(String key) {
+			 public static String getProperty(String key) {
+			        try {
+			            if (prop == null) {
 
-		        try {
-		            if (prop == null) {
-		                FileInputStream fis = new FileInputStream(
-		                        "D:\\A new Eclipse Project\\Yatra.com\\src\\main\\resources\\Data.properties");
+			                String path = System.getProperty("user.dir")
+			                        + "/src/main/resources/Data.properties";
 
-		                prop = new Properties();
-		                prop.load(fis);
-		            }
+			                FileInputStream fis = new FileInputStream(path);
 
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        }
+			                prop = new Properties();
+			                prop.load(fis);
+			            }
 
-		        return prop.getProperty(key);
-		    }
-}
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
+
+			        return prop.getProperty(key);
+			    }}
